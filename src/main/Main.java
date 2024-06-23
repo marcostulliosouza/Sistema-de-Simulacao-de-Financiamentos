@@ -1,3 +1,9 @@
+/*
+* Nome do Aluno: Marcos Tullio Silva de Souza
+* Disciplina: Fundamentos de Programação Orientado a Objetos
+* Atividade Somativa 1: Múltiplos Financiamentos
+* */
+
 package main;
 
 import modelo.Financiamento;
