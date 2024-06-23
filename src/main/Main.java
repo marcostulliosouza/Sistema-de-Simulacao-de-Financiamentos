@@ -1,3 +1,8 @@
+package main;
+
+import modelo.Financiamento;
+import util.InterfaceUsuario;
+
 public class Main {
     public static void main(String[] args) {
         InterfaceUsuario interfaceUsuario = new InterfaceUsuario();
@@ -10,7 +15,7 @@ public class Main {
         prazoFinanciamento = interfaceUsuario.solicitarPrazoFinanciamento();
         taxaJurosAnual = interfaceUsuario.solicitarTaxaJurosAnual();
 
-        // Criando o Objeto Financiamento c/ os Dados Lidos
+        // Criando o Objeto modelo.Financiamento c/ os Dados Lidos
         Financiamento financiamento = new Financiamento(valorImovel, prazoFinanciamento, taxaJurosAnual);
 
         // Calculando e Resultados

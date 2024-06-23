@@ -1,3 +1,5 @@
+package util;
+
 import java.util.Scanner;
 
 public class InterfaceUsuario {
@@ -13,7 +15,7 @@ public class InterfaceUsuario {
         System.out.print("Digite o valor do imóvel: ");
         return scanner.nextDouble();
     }
-    // Método para Soliciar o Prazo do Financiamento
+    // Método para Soliciar o Prazo do modelo.Financiamento
     public int solicitarPrazoFinanciamento(){
         System.out.print("Digite o prazo do financiamento (em anos): ");
         return scanner.nextInt();
