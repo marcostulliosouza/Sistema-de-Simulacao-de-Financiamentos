@@ -15,7 +15,7 @@ public class Financiamento {
 
     // Métodos para Pagamento
     public double pagamentoMensal(){
-        return ((valorImovel / (prazoFinanciamento * 12)) * (1 + ((taxaJurosAnual / 100) / 12)));
+        return ((valorImovel / (prazoFinanciamento * 12)) * (1 + ((taxaJurosAnual) / (100 * 12))));
     }
 
     public double pagamentoTotal(){

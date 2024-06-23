@@ -28,10 +28,10 @@ public class InterfaceUsuario {
         do{
             System.out.print("Digite o prazo do financiamento (em anos): ");
             prazoFinanciamento = scanner.nextInt();
-            if (prazoFinanciamento <= 0 && prazoFinanciamento > 30){
+            if (prazoFinanciamento <= 0 || prazoFinanciamento > 30){
                 System.out.println("Erro 02: Valor Inválido! O prazo do financiamento deve ser positivo e não mais que 30 anos.");
             }
-        } while(prazoFinanciamento <= 0 && prazoFinanciamento > 30);
+        } while(prazoFinanciamento <= 0 || prazoFinanciamento > 30);
         return prazoFinanciamento;
     }
     // Método para Solicitar a Taza de Juros Anual
@@ -45,5 +45,18 @@ public class InterfaceUsuario {
             }
         } while (taxaJurosAnual <=0 || taxaJurosAnual > 100);
         return taxaJurosAnual;
+    }
+
+    // Método p/ Solicitar a Quantidade de Financiamentos
+    public int solicitarQuantidadeFinanciamentos(){
+        int qtdFinanciamentos;
+        do {
+            System.out.print("Quantos financiamos deseja realizar? ");
+            qtdFinanciamentos = scanner.nextInt();
+            if (qtdFinanciamentos <= 0){
+                System.out.println("Erro 04: Valor Inválido! O valor dever ser positivo e maior que zero.");
+            }
+        } while (qtdFinanciamentos <= 0);
+        return qtdFinanciamentos;
     }
 }
