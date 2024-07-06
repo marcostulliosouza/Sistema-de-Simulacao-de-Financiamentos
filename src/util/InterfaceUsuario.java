@@ -59,4 +59,17 @@ public class InterfaceUsuario {
         } while (qtdFinanciamentos <= 0);
         return qtdFinanciamentos;
     }
+
+    // Método p/ Solicitar o Tipo de Financiamento
+    public String solicitarTipoFinanciamento(){
+        String tipoFinanciamento;
+        do{
+            System.out.print("Digite o tipo de financiamento (casa, apartamento, terreno): ");
+            tipoFinanciamento = scanner.next().toLowerCase();
+            if (!tipoFinanciamento.equals("casa") && !tipoFinanciamento.equals("apartamento") && !tipoFinanciamento.equals("terreno")){
+                System.out.println("Erro 05: Tipo de financiamento inválido! Escolha entre 'casa', 'apartamento' ou 'terreno'.");
+            }
+        } while(!tipoFinanciamento.equals("casa") && !tipoFinanciamento.equals("apartamento") && !tipoFinanciamento.equals("terreno"));
+        return tipoFinanciamento;
+    }
 }
