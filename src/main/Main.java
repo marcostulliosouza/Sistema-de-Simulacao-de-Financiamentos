@@ -1,9 +1,3 @@
-/*
- * Nome do Aluno: Marcos Tullio Silva de Souza
- * Disciplina: Fundamentos de Programação Orientado a Objetos
- * Atividade Somativa 2: Múltiplos Financiamentos
- * */
-
 package main;
 
 import modelo.Casa;
@@ -11,6 +5,7 @@ import modelo.Terreno;
 import modelo.Apartamento;
 import modelo.Financiamento;
 import util.InterfaceUsuario;
+import util.DescontoMaiorDoQueJurosException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,18 +17,23 @@ public class Main {
         // Criação de Array para Armazenar os Financiamentos
         List<Financiamento> listaDeFinanciamentos = new ArrayList<Financiamento>();
 
-        // Solicita os dados p/ um financiamento do usuário
-        System.out.println("Informe os dados para um financiamento:");
-        String tipoFinancimento = interfaceUsuario.solicitarTipoFinanciamento();
+        // Solicita os dados para um financiamento
+        String tipoFinanciamento = interfaceUsuario.solicitarTipoFinanciamento();
         double valorImovel = interfaceUsuario.solicitarValorImovel();
         int prazoFinanciamento = interfaceUsuario.solicitarPrazoFinanciamento();
         double taxaJurosAnual = interfaceUsuario.solicitarTaxaJurosAnual();
 
-        switch (tipoFinancimento){
+        switch (tipoFinanciamento) {
             case "casa":
                 double tamanhoAreaConstruida = interfaceUsuario.solicitarTamanhoAreaConstruida();
                 double tamanhoTerreno = interfaceUsuario.solicitarTamanhoTerreno();
-                listaDeFinanciamentos.add(new Casa(valorImovel, prazoFinanciamento, taxaJurosAnual, tamanhoAreaConstruida, tamanhoTerreno));
+                Casa casa = new Casa(valorImovel, prazoFinanciamento, taxaJurosAnual, tamanhoAreaConstruida, tamanhoTerreno);
+                listaDeFinanciamentos.add(casa);
+                try {
+                    casa.aplicarDesconto(500); // Exemplo de aplicação de desconto
+                } catch (DescontoMaiorDoQueJurosException e) {
+                    System.out.println(e.getMessage());
+                }
                 break;
             case "apartamento":
                 int numeroVagasGaragem = interfaceUsuario.solicitarNumeroVagasGaragem();
@@ -46,12 +46,6 @@ public class Main {
                 break;
         }
 
-//        // Adiciona financiamentos diretamente no código
-//        listaDeFinanciamentos.add(new Casa(200000, 10, 4.5, 120, 200));
-//        listaDeFinanciamentos.add(new Casa(300000, 15, 5.0, 150, 300));
-//        listaDeFinanciamentos.add(new Apartamento(250000, 20, 3.5, 2, 10));
-//        listaDeFinanciamentos.add(new Terreno(100000, 10, 6.0, "Residencial"));
-
         // Calculando e exibindo os totais
         double totalImoveis = 0;
         double totalFinanciamentos = 0;
@@ -60,7 +54,6 @@ public class Main {
         System.out.println("************************************************************************************************");
         for (Financiamento financiamento : listaDeFinanciamentos) {
             contador++;
-            System.out.printf("Financiamento %d - ", contador);
             financiamento.mostrarInformacoes();
             totalImoveis += financiamento.getValorImovel();
             totalFinanciamentos += financiamento.pagamentoTotal();

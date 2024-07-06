@@ -24,7 +24,7 @@ public class Apartamento extends Financiamento {
 
     @Override
     public void mostrarInformacoes() {
-        System.out.printf("Apartamento - Valor do Imóvel: R$ %.2f, Valor Mensal: R$ %.2f, Valor Total do Financiamento: R$ %.2f%n",
+        System.out.printf("Financiamento [Apartamento] - Valor do Imóvel: R$ %.2f, Valor Mensal: R$ %.2f, Valor Total do Financiamento: R$ %.2f%n",
                 valorImovel, pagamentoMensal(), pagamentoTotal());
     }
 }

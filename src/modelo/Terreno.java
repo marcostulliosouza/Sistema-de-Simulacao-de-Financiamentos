@@ -21,7 +21,7 @@ public class Terreno extends Financiamento {
 
     @Override
     public void mostrarInformacoes() {
-        System.out.printf("Terreno - Valor do Imóvel: R$ %.2f, Valor Mensal: R$ %.2f, Valor Total do Financiamento: R$ %.2f%n",
+        System.out.printf("Financiamento [Terreno] - Valor do Imóvels: R$ %.2f, Valor Mensal: R$ %.2f, Valor Total do Financiamento: R$ %.2f%n",
                 valorImovel, pagamentoMensal(), pagamentoTotal());
     }
 }
