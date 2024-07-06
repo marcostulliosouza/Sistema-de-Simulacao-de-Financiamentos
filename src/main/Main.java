@@ -1,8 +1,8 @@
 /*
-* Nome do Aluno: Marcos Tullio Silva de Souza
-* Disciplina: Fundamentos de Programação Orientado a Objetos
-* Atividade Somativa 2: Múltiplos Financiamentos
-* */
+ * Nome do Aluno: Marcos Tullio Silva de Souza
+ * Disciplina: Fundamentos de Programação Orientado a Objetos
+ * Atividade Somativa 2: Múltiplos Financiamentos
+ * */
 
 package main;
 
@@ -22,32 +22,35 @@ public class Main {
         // Criação de Array para Armazenar os Financiamentos
         List<Financiamento> listaDeFinanciamentos = new ArrayList<Financiamento>();
 
-        // Solicitando a Quantidade de Financiamentos
-        int qtdFinanciamentos = interfaceUsuario.solicitarQuantidadeFinanciamentos();
+        // Solicita os dados p/ um financiamento do usuário
+        System.out.println("Informe os dados para um financiamento:");
+        String tipoFinancimento = interfaceUsuario.solicitarTipoFinanciamento();
+        double valorImovel = interfaceUsuario.solicitarValorImovel();
+        int prazoFinanciamento = interfaceUsuario.solicitarPrazoFinanciamento();
+        double taxaJurosAnual = interfaceUsuario.solicitarTaxaJurosAnual();
 
-        for (int i = 0; i < qtdFinanciamentos; i++){
-            System.out.print("Financiamento " + (i + 1) +": ");
-
-            // Solicita os dados p/ um financiamento
-            String tipoFinancimento = interfaceUsuario.solicitarTipoFinanciamento();
-            double valorImovel = interfaceUsuario.solicitarValorImovel();
-            int prazoFinanciamento = interfaceUsuario.solicitarPrazoFinanciamento();
-            double taxaJurosAnual = interfaceUsuario.solicitarTaxaJurosAnual();
-            System.out.println("\n");
-
-            // Adiciona o financiamento com base no tipo
-            switch (tipoFinancimento){
-                case "casa":
-                    listaDeFinanciamentos.add(new Casa(valorImovel, prazoFinanciamento, taxaJurosAnual));
-                    break;
-                case "apartamento":
-                    listaDeFinanciamentos.add(new Apartamento(valorImovel, prazoFinanciamento, taxaJurosAnual));
-                    break;
-                case "terreno":
-                    listaDeFinanciamentos.add(new Terreno(valorImovel, prazoFinanciamento, taxaJurosAnual));
-                    break;
-            }
+        switch (tipoFinancimento){
+            case "casa":
+                double tamanhoAreaConstruida = interfaceUsuario.solicitarTamanhoAreaConstruida();
+                double tamanhoTerreno = interfaceUsuario.solicitarTamanhoTerreno();
+                listaDeFinanciamentos.add(new Casa(valorImovel, prazoFinanciamento, taxaJurosAnual, tamanhoAreaConstruida, tamanhoTerreno));
+                break;
+            case "apartamento":
+                int numeroVagasGaragem = interfaceUsuario.solicitarNumeroVagasGaragem();
+                int numeroAndar = interfaceUsuario.solicitarNumeroAndar();
+                listaDeFinanciamentos.add(new Apartamento(valorImovel, prazoFinanciamento, taxaJurosAnual, numeroVagasGaragem, numeroAndar));
+                break;
+            case "terreno":
+                String tipoZona = interfaceUsuario.solicitarTipoZona();
+                listaDeFinanciamentos.add(new Terreno(valorImovel, prazoFinanciamento, taxaJurosAnual, tipoZona));
+                break;
         }
+
+//        // Adiciona financiamentos diretamente no código
+//        listaDeFinanciamentos.add(new Casa(200000, 10, 4.5, 120, 200));
+//        listaDeFinanciamentos.add(new Casa(300000, 15, 5.0, 150, 300));
+//        listaDeFinanciamentos.add(new Apartamento(250000, 20, 3.5, 2, 10));
+//        listaDeFinanciamentos.add(new Terreno(100000, 10, 6.0, "Residencial"));
 
         // Calculando e exibindo os totais
         double totalImoveis = 0;
@@ -57,9 +60,8 @@ public class Main {
         System.out.println("************************************************************************************************");
         for (Financiamento financiamento : listaDeFinanciamentos) {
             contador++;
-            String tipo = financiamento.getClass().getSimpleName();
-            System.out.printf("Financiamento %d [%s] - valor do imóvel: R$ %.2f, valor mensal: R$ %.2f, valor total do financiamento: R$ %.2f%n",
-                    contador, tipo, financiamento.getValorImovel(), financiamento.pagamentoMensal(), financiamento.pagamentoTotal());
+            System.out.printf("Financiamento %d - ", contador);
+            financiamento.mostrarInformacoes();
             totalImoveis += financiamento.getValorImovel();
             totalFinanciamentos += financiamento.pagamentoTotal();
         }
