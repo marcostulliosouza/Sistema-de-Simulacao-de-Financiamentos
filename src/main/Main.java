@@ -14,36 +14,43 @@ public class Main {
     public static void main(String[] args) {
         InterfaceUsuario interfaceUsuario = new InterfaceUsuario();
 
+        // Solicita a quantidade de financiamentos
+        int quantidadeFinanciamentos = interfaceUsuario.solicitarQuantidadeFinanciamentos();
+
         // Criação de Array para Armazenar os Financiamentos
-        List<Financiamento> listaDeFinanciamentos = new ArrayList<Financiamento>();
+        List<Financiamento> listaDeFinanciamentos = new ArrayList<>();
 
-        // Solicita os dados para um financiamento
-        String tipoFinanciamento = interfaceUsuario.solicitarTipoFinanciamento();
-        double valorImovel = interfaceUsuario.solicitarValorImovel();
-        int prazoFinanciamento = interfaceUsuario.solicitarPrazoFinanciamento();
-        double taxaJurosAnual = interfaceUsuario.solicitarTaxaJurosAnual();
+        // Loop para criar cada financiamento
+        for (int i = 0; i < quantidadeFinanciamentos; i++) {
+            System.out.println("************************************************************************************************");
+            System.out.printf("Inserindo dados para o financiamento %d:%n", i + 1);
+            String tipoFinanciamento = interfaceUsuario.solicitarTipoFinanciamento();
+            double valorImovel = interfaceUsuario.solicitarValorImovel();
+            int prazoFinanciamento = interfaceUsuario.solicitarPrazoFinanciamento();
+            double taxaJurosAnual = interfaceUsuario.solicitarTaxaJurosAnual();
 
-        switch (tipoFinanciamento) {
-            case "casa":
-                double tamanhoAreaConstruida = interfaceUsuario.solicitarTamanhoAreaConstruida();
-                double tamanhoTerreno = interfaceUsuario.solicitarTamanhoTerreno();
-                Casa casa = new Casa(valorImovel, prazoFinanciamento, taxaJurosAnual, tamanhoAreaConstruida, tamanhoTerreno);
-                listaDeFinanciamentos.add(casa);
-                try {
-                    casa.aplicarDesconto(500); // Exemplo de aplicação de desconto
-                } catch (DescontoMaiorDoQueJurosException e) {
-                    System.out.println(e.getMessage());
-                }
-                break;
-            case "apartamento":
-                int numeroVagasGaragem = interfaceUsuario.solicitarNumeroVagasGaragem();
-                int numeroAndar = interfaceUsuario.solicitarNumeroAndar();
-                listaDeFinanciamentos.add(new Apartamento(valorImovel, prazoFinanciamento, taxaJurosAnual, numeroVagasGaragem, numeroAndar));
-                break;
-            case "terreno":
-                String tipoZona = interfaceUsuario.solicitarTipoZona();
-                listaDeFinanciamentos.add(new Terreno(valorImovel, prazoFinanciamento, taxaJurosAnual, tipoZona));
-                break;
+            switch (tipoFinanciamento) {
+                case "casa":
+                    double tamanhoAreaConstruida = interfaceUsuario.solicitarTamanhoAreaConstruida();
+                    double tamanhoTerreno = interfaceUsuario.solicitarTamanhoTerreno();
+                    Casa casa = new Casa(valorImovel, prazoFinanciamento, taxaJurosAnual, tamanhoAreaConstruida, tamanhoTerreno);
+                    listaDeFinanciamentos.add(casa);
+                    try {
+                        casa.aplicarDesconto(1000); // Exemplo de aplicação de desconto
+                    } catch (DescontoMaiorDoQueJurosException e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+                case "apartamento":
+                    int numeroVagasGaragem = interfaceUsuario.solicitarNumeroVagasGaragem();
+                    int numeroAndar = interfaceUsuario.solicitarNumeroAndar();
+                    listaDeFinanciamentos.add(new Apartamento(valorImovel, prazoFinanciamento, taxaJurosAnual, numeroVagasGaragem, numeroAndar));
+                    break;
+                case "terreno":
+                    String tipoZona = interfaceUsuario.solicitarTipoZona();
+                    listaDeFinanciamentos.add(new Terreno(valorImovel, prazoFinanciamento, taxaJurosAnual, tipoZona));
+                    break;
+            }
         }
 
         // Calculando e exibindo os totais
