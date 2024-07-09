@@ -12,6 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+/*
+ * Nome do Aluno: Marcos Tullio Silva de Souza
+ * Disciplina: Fundamentos de Programação Orientado a Objetos
+ * Atividade Somativa 2: Múltiplos Financiamentos
+ * */
+
 public class Main {
     public static void main(String[] args) {
         InterfaceUsuario interfaceUsuario = new InterfaceUsuario();
