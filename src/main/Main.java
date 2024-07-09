@@ -10,6 +10,7 @@ import util.DescontoMaiorDoQueJurosException;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Main {
     public static void main(String[] args) {
@@ -36,7 +37,7 @@ public class Main {
                     Casa casa = new Casa(valorImovel, prazoFinanciamento, taxaJurosAnual, tamanhoAreaConstruida, tamanhoTerreno);
                     listaDeFinanciamentos.add(casa);
                     try {
-                        casa.aplicarDesconto(1000); // Exemplo de aplicação de desconto
+                        casa.aplicarDesconto(500); // Exemplo de aplicação de desconto
                     } catch (DescontoMaiorDoQueJurosException e) {
                         System.out.println(e.getMessage());
                     }
@@ -93,17 +94,17 @@ public class Main {
             for (Financiamento financiamento : financiamentos) {
                 if (financiamento instanceof Casa) {
                     Casa casa = (Casa) financiamento;
-                    writer.write(String.format("casa,%.2f,%d,%.2f,%.2f,%.2f%n",
+                    writer.write(String.format(Locale.US,"casa,%.2f,%d,%.2f,%.2f,%.2f%n",
                             casa.getValorImovel(), casa.getPrazoFinanciamento(), casa.getTaxaJurosAnual(),
                             casa.getTamanhoAreaConstruida(), casa.getTamanhoTerreno()));
                 } else if (financiamento instanceof Apartamento) {
                     Apartamento apartamento = (Apartamento) financiamento;
-                    writer.write(String.format("apartamento,%.2f,%d,%.2f,%d,%d%n",
+                    writer.write(String.format(Locale.US,"apartamento,%.2f,%d,%.2f,%d,%d,%n",
                             apartamento.getValorImovel(), apartamento.getPrazoFinanciamento(), apartamento.getTaxaJurosAnual(),
                             apartamento.getNumeroVagasGaragem(), apartamento.getNumeroAndar()));
                 } else if (financiamento instanceof Terreno) {
                     Terreno terreno = (Terreno) financiamento;
-                    writer.write(String.format("terreno,%.2f,%d,%.2f,%s%n",
+                    writer.write(String.format(Locale.US,"terreno,%.2f,%d,%.2f,%s,%n",
                             terreno.getValorImovel(), terreno.getPrazoFinanciamento(), terreno.getTaxaJurosAnual(),
                             terreno.getTipoZona()));
                 }
@@ -112,6 +113,7 @@ public class Main {
             e.printStackTrace();
         }
     }
+
 
     private static List<Financiamento> lerDadosTexto(String nomeArquivo) {
         List<Financiamento> financiamentos = new ArrayList<>();
