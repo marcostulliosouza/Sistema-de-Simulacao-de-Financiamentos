@@ -3,6 +3,8 @@ package modelo;
 import util.DescontoMaiorDoQueJurosException;
 
 public class Casa extends Financiamento {
+    private static final long serialVersionUID = 1L; // Adicionando serialVersionUID
+
     private double tamanhoAreaConstruida;
     private double tamanhoTerreno;
 
@@ -24,17 +26,24 @@ public class Casa extends Financiamento {
     }
 
     public double aplicarDesconto(double desconto) throws DescontoMaiorDoQueJurosException {
-        double valorMensal = pagamentoMensal();
         double jurosMensal = (valorImovel * (taxaJurosAnual / 100) / 12);
         if (desconto > jurosMensal) {
             throw new DescontoMaiorDoQueJurosException("O desconto não pode ser maior que o valor dos juros da mensalidade.");
         }
-        return valorMensal - desconto;
+        return pagamentoMensal() - desconto;
     }
 
     @Override
     public void mostrarInformacoes() {
         System.out.printf("Financiamento [Casa] - Valor do Imóvel: R$ %.2f, Valor Mensal: R$ %.2f, Valor Total do Financiamento: R$ %.2f%n",
                 valorImovel, pagamentoMensal(), pagamentoTotal());
+    }
+
+    public double getTamanhoAreaConstruida() {
+        return tamanhoAreaConstruida;
+    }
+
+    public double getTamanhoTerreno() {
+        return tamanhoTerreno;
     }
 }

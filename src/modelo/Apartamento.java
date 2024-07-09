@@ -1,6 +1,8 @@
 package modelo;
 
 public class Apartamento extends Financiamento {
+    private static final long serialVersionUID = 1L; // Adicionando serialVersionUID
+
     private int numeroVagasGaragem;
     private int numeroAndar;
 
@@ -12,9 +14,8 @@ public class Apartamento extends Financiamento {
 
     @Override
     public double pagamentoMensal() {
-        double taxaMensal = (taxaJurosAnual / 100) / 12;
-        int meses = prazoFinanciamento * 12;
-        return (valorImovel * taxaMensal * Math.pow(1 + taxaMensal, meses)) / (Math.pow(1 + taxaMensal, meses) - 1);
+        double valorMensal = (valorImovel / (prazoFinanciamento * 12)) * (1 + (taxaJurosAnual / 100) / 12);
+        return valorMensal;
     }
 
     @Override
@@ -26,5 +27,13 @@ public class Apartamento extends Financiamento {
     public void mostrarInformacoes() {
         System.out.printf("Financiamento [Apartamento] - Valor do Imóvel: R$ %.2f, Valor Mensal: R$ %.2f, Valor Total do Financiamento: R$ %.2f%n",
                 valorImovel, pagamentoMensal(), pagamentoTotal());
+    }
+
+    public int getNumeroVagasGaragem() {
+        return numeroVagasGaragem;
+    }
+
+    public int getNumeroAndar() {
+        return numeroAndar;
     }
 }

@@ -1,6 +1,10 @@
 package modelo;
 
-public abstract class Financiamento {
+import java.io.Serializable;
+
+public abstract class Financiamento implements Serializable {
+    private static final long serialVersionUID = 1L; // Adicionando serialVersionUID
+
     protected double valorImovel;
     protected int prazoFinanciamento;
     protected double taxaJurosAnual;
@@ -11,21 +15,12 @@ public abstract class Financiamento {
         this.taxaJurosAnual = taxaJurosAnual;
     }
 
-    public double getValorImovel() {
-        return valorImovel;
-    }
-
-    public int getPrazoFinanciamento() {
-        return prazoFinanciamento;
-    }
-
-    public double getTaxaJurosAnual() {
-        return taxaJurosAnual;
-    }
-
     public abstract double pagamentoMensal();
-
     public abstract double pagamentoTotal();
-
     public abstract void mostrarInformacoes();
+
+    // Getters
+    public double getValorImovel() { return valorImovel; }
+    public int getPrazoFinanciamento() { return prazoFinanciamento; }
+    public double getTaxaJurosAnual() { return taxaJurosAnual; }
 }
